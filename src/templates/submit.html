@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="site-header-logo">
+        <h1 class="text-center">
+            Data Submission
+        </h1>
+    </div>
+    <div>
+        <form class="row m-auto p-2" style="margin: 0 auto;" method="POST" action="{{ url_for('submit') }}">
+            <div class="col-2 form-outline mb-3">
+                <input type="text" id="longitude" name="longitude" class="form-control "
+                    placeholder="Enter a longitude value" />
+                <label class="form-label" for="longitude">Longitude</label>
+            </div>
+
+            <div class="col-2 form-outline mb-3">
+                <input type="text" id="latitude" name="latitude" class="form-control "
+                    placeholder="Enter a latitude value" />
+                <label class="form-label" for="latitude">Latitude</label>
+            </div>
+
+            <div class="col-2 form-outline mb-3">
+                <input type="text" id="latitude" name="latitude" class="form-control "
+                    placeholder="Enter a latitude value" />
+                <label class="form-label" for="latitude">Latitude</label>
+            </div>
+
+            <div class="col-2 form-outline mb-3">
+                <input type="text" id="latitude" name="latitude" class="form-control "
+                    placeholder="Enter a latitude value" />
+                <label class="form-label" for="latitude">Latitude</label>
+            </div>
+
+            <div class="col-3 mb-3">
+                <input class="form-control " type="file" id="formFile">
+                <label for="formFile" class="form-label">Image</label>
+            </div>
+
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary"
+                    style="padding-left: 1rem; padding-right: 1rem; width: 100%;">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="alert alert-primary" role="alert">
+        The current location is {{  location  }}
+    </div>
+    <div class="row m-auto p-2">
+        <div class="col-sm-6">
+            <div class="card m-auto" data-aos="fade-right">
+                <div class="card-body">
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card m-auto" data-aos="fade-left">
+                <div class="card-body">
+                    <div id="chart2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-auto p-2">
+        <div class="col-sm-6">
+            <div class="card m-auto" data-aos="fade-right">
+                <div class="card-body">
+                    <div id="chart3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card m-auto" data-aos="fade-left">
+                <div class="card-body">
+                    <div id="chart4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- plotly CDN -->
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graphs1 = {{ graph1JSON | safe}};
+        Plotly.plot("chart1", graphs1, {});
+
+        var graphs2 = {{ graph2JSON | safe}};
+        Plotly.plot("chart2", graphs2, {});
+
+        var graphs3 = {{ graph3JSON | safe}};
+        Plotly.plot("chart3", graphs3, {});
+
+        var graphs4 = {{ graph4JSON | safe}};
+        Plotly.plot("chart4", graphs4, {});
+    </script>
+
+{% endblock %}

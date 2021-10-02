@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{url_for('static', filename = 'main.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{url_for('static', filename = 'login.css')}}" type="text/css">
+  <link rel="icon" type="image/png" href="static/img/neuron.png" sizes="32x32" />
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/> \
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  {# <script>
+    async function getRequest(url='') {
+        const response = await fetch(url, {
+          method: 'GET', 
+          cache: 'no-cache'
+        })
+        return response.json()
+    }
+      
+    document.addEventListener('DOMContentLoaded', function() {
+
+    let url = document.location
+    let route = "/flaskwebgui-keep-server-alive"
+    let interval_request = 3 * 1000 //sec
+
+    function keep_alive_server(){
+        getRequest(url + route)
+        .then(data => console.log(data))
+    }
+
+    setInterval(keep_alive_server, interval_request)()
+
+    })
+  </script> #}
+
+  {% if title %}
+  <title>{{title}}</title>
+  {% else %}
+  <title>HeatML</title>
+  {% endif %}
+
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{  url_for('home')  }}">
+          <img src="static/img/neuron.png" alt="Neuron Icon" width="32" height="32"
+            class="d-inline-block align-top" />
+          HeatML</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{{  url_for('submit')  }}">Submit</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{  url_for('data')  }}">Datasets</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{{  url_for('logout' if current_user.is_authenticated else 'login')  }}">
+                {{  "Logout" if current_user.is_authenticated else "Login"  }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xm-12">
+          <div class="ml-auto mr-auto">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      offset: 400,
+      duration: 1000,
+      once: true
+    });
+
+  </script>
+
+
+
+</body>
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+
+  <div class="text-center py-3">
+    <p class="footer-attribution">Icons made by
+      <a href="https://www.freepik.com" title="Freepik">Freepik</a> and
+      <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a>
+      from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </p>
+  </div>
+
+</footer>
+<!-- Footer -->
+
+</html>

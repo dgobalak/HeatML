@@ -1,0 +1,51 @@
+/* @font-face {
+    font-family: "lobsterregular";
+    src: url("./fonts/lobster-regular-webfont.woff2") format("woff2"),
+      url("./fonts/lobster-regular-webfont.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "work_sansregular";
+    src: url("./fonts/worksans-variablefont_wght-webfont.woff2") format("woff2"),
+      url("./fonts/worksans-variablefont_wght-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+  } */
+  
+  * {
+    padding: 0px;
+    margin: 0;
+    font-family: Arial;
+  }
+  
+  .navbar-text {
+    color: rgb(0, 0, 0);
+  }
+  
+  .navbar-brand{
+    color: rgb(255, 0, 0);
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+   
+  .site-header-logo h1 {
+    color: rgb(0, 0, 0);
+    font-family: Arial;
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+
+  .footer-attribution {
+    font-size: 0.6rem;
+    font-family: Calibri;
+    color: black;
+  }
+
+  .footer-attribution a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
