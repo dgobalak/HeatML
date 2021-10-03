@@ -13,7 +13,6 @@ db = SQLAlchemy(app)
 #     longitude = db.Column(db.Float(20))
 #     latitude = db.Column(db.Float(20))
 #     datetime = db.Column(db.DateTime(timezone=True))
-#     landslide = db.Column(db.Boolean())
     
 #     def __init__(self, city=None, country=None):
 #         pass
