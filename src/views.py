@@ -41,27 +41,8 @@ def home():
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
     if current_user.is_authenticated:
-        # Graph One
-        df = px.data.medals_wide()
-        fig1 = px.bar(df, x="nation", y=["gold", "silver", "bronze"], title="Medal Count")
-        graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-
-        # Graph two
-        df = px.data.iris()
-        fig2 = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
-                color='species',  title="Iris Dataset")
-        graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-
-        # Graph Three
-        df = px.data.medals_wide()
-        fig1 = px.bar(df, x="nation", y=["gold", "silver", "bronze"], title="Medal Count")
-        graph3JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-
-        # Graph Four
-        df = px.data.iris()
-        fig2 = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
-                color='species',  title="Iris Dataset")
-        graph4JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+        df = get_data("Toronto", "Canada")
+        graph1JSON, graph2JSON, graph3JSON, graph4JSON = get_graphs(df)
 
         location = "Toronto, Canada"
 
