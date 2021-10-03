@@ -3,4 +3,9 @@ src/__pycache__
 __pycache__
 database.db
 src/api_config.py
-notebooks
+
+notebooks/api_config.py
+notebooks/__pycache__
+
+*.csv
+notebooks/datasets.zip

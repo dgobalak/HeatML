@@ -15,17 +15,15 @@ def index():
 def home():
     if request.method == 'POST':
         city, country = request.form['city'], request.form['country']
-        print(city, country)
-        graph1JSON, graph2JSON, graph3JSON = get_graphs(city, country)
-        msg = get_msg()
-        trigger = get_trigger()
-        return render_template('index.html', graph1JSON=graph1JSON,  graph2JSON=graph2JSON, graph3JSON=graph3JSON, msg=msg, trigger=trigger, show_graphs=True)
+        df = get_data(city, country)
+        graph1JSON, graph2JSON, graph3JSON, graph4JSON = get_graphs(df)
+        msg = get_msg(df, city, country)
+        trigger = get_trigger(df)
+        slope, intercept, r_value, p_value, std_err = get_stress_graph_stats(df)
+        slope_txt = "increasing" if slope > 0 else "decreasing"
+        return render_template('index.html', graph1JSON=graph1JSON,  graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, msg=msg, trigger=trigger, show_graphs=True, slope=slope, intercept=intercept, r_value=r_value, p_value=p_value, std_err=std_err, slope_txt=slope_txt)
 
-    graph1JSON, graph2JSON, graph3JSON = get_graphs()
-    msg = get_msg()
-    trigger = get_trigger()
-
-    return render_template('index.html', graph1JSON=graph1JSON,  graph2JSON=graph2JSON, graph3JSON=graph3JSON, msg=msg, trigger=trigger, show_graphs=False)
+    return render_template('index.html', msg="Please enter your location to obtain a warning", trigger="secondary", show_graphs=False)
 
 
 @app.route('/submit', methods=['GET', 'POST'])
