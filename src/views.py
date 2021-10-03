@@ -19,8 +19,21 @@ def home():
         graph1JSON, graph2JSON, graph3JSON, graph4JSON = get_graphs(df)
         msg, trigger = get_warning(df, city, country)
         slope_hi, slope_sm, slope_ff, slope_co, slope_o3, slope_no2 = get_graph_stats(df)
-        
-        return render_template('index.html', graph1JSON=graph1JSON,  graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, msg=msg, trigger=trigger, show_graphs=True)
+        return render_template('index.html', 
+            graph1JSON=graph1JSON,  
+            graph2JSON=graph2JSON, 
+            graph3JSON=graph3JSON, 
+            graph4JSON=graph4JSON, 
+            msg=msg, 
+            trigger=trigger, 
+            show_graphs=True,         
+            slope_hi=slope_hi, 
+            slope_sm=slope_sm, 
+            slope_ff=slope_ff, 
+            slope_co=slope_co, 
+            slope_o3=slope_o3, 
+            slope_no2=slope_no2
+        )
 
     return render_template('index.html', msg="Please enter your location to obtain a warning", trigger="secondary", show_graphs=False)
 
