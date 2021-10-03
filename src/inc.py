@@ -45,7 +45,6 @@ def get_fire_index_graph(df):
 
 
 def get_air_graph(df):
-    # fig = px.line(df, x='Datetime', y=["Carbon Monoxide (ugm3)", "Ozone (ugm3)", "Nitrogen Dioxide (ugm3)", "Temp Diff 1km vs 2m (F)"], title="Air Quality Time Series")
     df2 = df.rename(columns={"Carbon Monoxide (ugm3)": "CO (ugm3)", "Ozone (ugm3)": "O3 (ugm3)", "Nitrogen Dioxide (ugm3)": "NO2 (ugm3)"})
     fig = px.line(df2, x='Datetime', y=["CO (ugm3)", "O3 (ugm3)", "NO2 (ugm3)"], title="Air Quality Time Series")
     fig.update_layout(
@@ -55,30 +54,68 @@ def get_air_graph(df):
     return graphJSON
 
 
-def get_msg(df, city, country):
-    max_hs = float(get_heat_stress_max(df))
-    location = city + ", " + country
-    if max_hs < 91:
-        msg = f"Predicted low risk for {location}. Practice basic safety and planning. Wear lightweight clothing. Use sunscreen."
-    elif max_hs >= 91 and max_hs < 103:
-        msg = f"Predicted moderate risk for {location}. Implement precautions and heighten awareness. Drink plenty of fluids, take precautions with certain medications. Take it easy."
-    else:
-        msg = f"Predicted high risk for {location}. Based on given data, you are not at risk of any heat-related illnesses. Get accilimated and be cautious."
-    return msg
-
-
-def get_trigger(df):
+def get_warning(df, city, country):
     triggers = {"green": "success", "red": "danger", "yellow": "warning"}
     trigger = None
-    max_hs = float(get_heat_stress_max(df))
-    if max_hs < 91:
+    
+    slope_hi, slope_sm, slope_ff, slope_co, slope_o3, slope_no2 = get_graph_stats(df)
+    last_hi = df["Heat Index (F)"].mean()
+    last_sm = df["Soil Moisture (mm)"].mean()
+    last_ff = df["Forest Fire Index"].mean()
+    last_co = df["Carbon Monoxide (ugm3)"].mean()
+    last_o3 = df["Ozone (ugm3)"].mean()
+    last_no2 = df["Nitrogen Dioxide (ugm3)"].mean()
+
+    msg = f"[{city}, {country}]: "
+    PRED_FACTOR = 50
+
+    hi_factor = last_hi + slope_hi * PRED_FACTOR
+    sm_factor = last_sm + slope_sm * PRED_FACTOR
+    ff_factor = last_ff + slope_ff * PRED_FACTOR if last_ff + slope_ff * PRED_FACTOR >=0 else 0
+    co_factor = last_co + slope_co * PRED_FACTOR
+    o3_factor = last_o3 + slope_o3 * PRED_FACTOR
+    no2_factor = last_no2 + slope_no2 * PRED_FACTOR   
+
+    if hi_factor < 91:
+        msg += f"Low risk of heat stress. Practice basic safety and planning. Wear lightweight clothing. Use sunscreen. "
         trigger = triggers["green"]
-    elif max_hs >= 91 and max_hs < 103:
+    elif hi_factor >= 91 and hi_factor < 103:
+        msg += f"Moderate risk of heat stress. Implement precautions and heighten awareness. Drink plenty of fluids, take precautions with certain medications. Plant trees to create more shade. Take it easy. "
         trigger = triggers["yellow"]
     else:
+        msg += f"High risk of heat stress. Based on given data, you are not at risk of any heat-related illnesses. Stay indoors and hydrated. "
         trigger = triggers["red"]
 
-    return trigger
+    if sm_factor < 100:
+        msg += f"Low risk of drought. "
+    else:
+        msg += f"High risk of drought. Begin storing food, water, and resources. Keep an eye on the news. "
+    
+    if ff_factor < 0.4:
+        msg += f"Low risk of wildfires. "
+    elif ff_factor >= 0.4 and ff_factor < 0.7:
+        msg += f"Moderate risk of wildfires. Prepare food/resources just in case. "
+    else:
+        msg += f"High risk of wildfires. Make plans to leave the area. "
+    
+    if co_factor < 650:
+        msg += f"Low risk of carbon monoxide-related problems. "
+    elif co_factor >= 91 and co_factor < 103:
+        msg += f"Moderate risk of carbon monoxide-related problems. Consider wearing a mask. "
+    else:
+        msg += f"High risk of carbon monoxide-related problems. Stay inside or wear a mask while outside. "
+    
+    if o3_factor < 160:
+        msg += f"Low risk of ozone-related problems. "
+    else:
+        msg += f"High risk of ozone-related problems. Consider biking or using public transit. "
+    
+    if no2_factor < 70:
+        msg += f"Low risk of nitrogen dioxide-related problems. "
+    else:
+        msg += f"High risk of nitrogen dioxide-related problems. Wear a mask. "
+    
+    return msg, trigger
 
 
 def get_data(city, country):
@@ -117,23 +154,20 @@ def get_data(city, country):
     df["Carbon Monoxide (ugm3)"] = df4["Carbon Monoxide (ugm3)"]
     df["Ozone (ugm3)"] = df5["Ozone (ugm3)"]
     df["Nitrogen Dioxide (ugm3)"] = df6["Nitrogen Dioxide (ugm3)"]
-    df["Temp Diff 1km vs 2m (F)"] = df7["Temp @ 1km (F)"].subtract(df8["Temp @ 2m (F)"])
 
     return df
 
 
-def get_heat_stress_max(df):
-    start = str(dt.datetime.utcnow().isoformat()) + "Z"
-    range = (df['Datetime'] > start)
-    df1 = df.loc[range]
-    max_hs = df1["Heat Index (F)"].max()
-
-    return max_hs
-
-
-def get_stress_graph_stats(df):
+def get_graph_stats(df):
     df_tmp = df
     df_tmp["date"] = pd.to_datetime(df_tmp["Datetime"])
     df_tmp['date_ordinal'] = pd.to_datetime(df_tmp['Datetime']).map(dt.datetime.toordinal)
-    slope, intercept, r_value, p_value, std_err = stats.linregress(df_tmp['date_ordinal'], df_tmp["Heat Index (F)"])
-    return slope, intercept, r_value, p_value, std_err
+
+    slope_hi = stats.linregress(df_tmp['date_ordinal'], df_tmp["Heat Index (F)"]).slope
+    slope_sm = stats.linregress(df_tmp['date_ordinal'], df_tmp["Soil Moisture (mm)"]).slope
+    slope_ff = stats.linregress(df_tmp['date_ordinal'], df_tmp["Forest Fire Index"]).slope
+    slope_co = stats.linregress(df_tmp['date_ordinal'], df_tmp["Carbon Monoxide (ugm3)"]).slope
+    slope_o3 = stats.linregress(df_tmp['date_ordinal'], df_tmp["Ozone (ugm3)"]).slope
+    slope_no2 = stats.linregress(df_tmp['date_ordinal'], df_tmp["Nitrogen Dioxide (ugm3)"]).slope
+
+    return slope_hi, slope_sm, slope_ff, slope_co, slope_o3, slope_no2

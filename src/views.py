@@ -17,11 +17,10 @@ def home():
         city, country = request.form['city'], request.form['country']
         df = get_data(city, country)
         graph1JSON, graph2JSON, graph3JSON, graph4JSON = get_graphs(df)
-        msg = get_msg(df, city, country)
-        trigger = get_trigger(df)
-        slope, intercept, r_value, p_value, std_err = get_stress_graph_stats(df)
-        slope_txt = "increasing" if slope > 0 else "decreasing"
-        return render_template('index.html', graph1JSON=graph1JSON,  graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, msg=msg, trigger=trigger, show_graphs=True, slope=slope, intercept=intercept, r_value=r_value, p_value=p_value, std_err=std_err, slope_txt=slope_txt)
+        msg, trigger = get_warning(df, city, country)
+        slope_hi, slope_sm, slope_ff, slope_co, slope_o3, slope_no2 = get_graph_stats(df)
+        
+        return render_template('index.html', graph1JSON=graph1JSON,  graph2JSON=graph2JSON, graph3JSON=graph3JSON, graph4JSON=graph4JSON, msg=msg, trigger=trigger, show_graphs=True)
 
     return render_template('index.html', msg="Please enter your location to obtain a warning", trigger="secondary", show_graphs=False)
 
