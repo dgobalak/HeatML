@@ -66,6 +66,7 @@
 
 * Python
 * Flask
+* web2gui
 * HTML/CSS/JS
 * SQLite
 * Meteomatics API
