@@ -66,8 +66,10 @@
 
 * Python
 * Flask
-* Scikit-Learn
-* HTML
+* HTML/CSS/JS
+* SQLite
+* Meteomatics API
+* Jupyter Notebook
 
 <!-- GETTING STARTED -->
 ## Getting Started
