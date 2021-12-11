@@ -12,7 +12,7 @@
 <!-- PROJECT LOGO -->
 <p align="center">
   <a href="https://github.com/dgobalak/NBA2KPredictions">
-  <img src="src/static/img/neuron.png" alt="Logo" width="80" height="80">
+  <img src="src/static/img/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">HeatML</h3>
