@@ -34,32 +34,31 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
-
+<summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+<ol>
+  <li>
+    <a href="#about-the-project">About The Project</a>
+    <ul>
+      <li><a href="#built-with">Built With</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#getting-started">Getting Started</a>
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#installation">Installation</a></li>
+    </ul>
+  </li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+</ol>
 
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-HeatML is my submission for the SpaceApps 2021 competition.
+HeatML is our submission for the SpaceApps 2021 competition.
+
+Climate change is one of the biggest problems facing humanity today. It's up to us (young scientists, engineers, and creatives) to address this challenge. We present to you HeatML, a desktop application with the sole purpose of warning civilians and governments about heat-related events and providing instructions towards mitigating them. We provide a simple interface displaying relevant weather data and important forecasts. We use machine learning to predict threat levels and provide instructions for mitigation. Our goal is to guide users in protecting themselves, loved ones, and their communities.
 
 ### Built With
 * Python
@@ -109,7 +108,7 @@ Note: You will need a meteomatics API key to run the app.
 <!-- CONTACT -->
 ## Contact
 
-Daniel Gobalakrishnan - dgobalak@uwaterloo.ca
+Daniel Gobalakrishnan: dgobalak@uwaterloo.ca
 
 Project Link: [https://2021.spaceappschallenge.org](https://2021.spaceappschallenge.org/challenges/statements/warning-things-are-heating-up/teams/heatml/project)
 
