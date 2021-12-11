@@ -12,13 +12,13 @@
 <!-- PROJECT LOGO -->
 <p align="center">
   <a href="https://github.com/dgobalak/NBA2KPredictions">
-    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
+  <img src="src/static/img/neuron.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">HeatML</h3>
 
   <p align="center">
-    SpaceApps Project
+    SpaceApps 2021 Project
     <!-- <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
@@ -59,15 +59,13 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<!-- 
-[![Product Name Screen Shot][product-screenshot]](https://example.com) -->
+HeatML is my submission for the SpaceApps 2021 competition.
 
 ### Built With
-
 * Python
 * Flask
 * web2gui
-* HTML/CSS/JS
+* HTML/CSS/JavaScript
 * SQLite
 * Meteomatics API
 * Jupyter Notebook
@@ -75,11 +73,10 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+To get a local copy up and running, follow these steps:
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * Verify if python is installed
   ```sh
   python --version
@@ -92,7 +89,7 @@ This is an example of how to list things you need to use the software and how to
   pip --version
   ```  
 
-### Installation
+### Installation and Setup
 
 1. Clone the repo
    ```sh
@@ -102,58 +99,29 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    pip install -r requirements.txt
    ```
+3. Run the Flask website
+   ```sh
+   python run.py
+   ```
 
-
-<!-- USAGE EXAMPLES
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_ -->
-
-
-
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues). -->
-
-
-
-<!-- CONTRIBUTING -->
-<!-- ## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
- -->
-
-
-<!-- LICENSE -->
-<!-- ## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
- -->
+Note: You will need a meteomatics API key to run the app.
 
 <!-- CONTACT -->
 ## Contact
 
 Daniel Gobalakrishnan - dgobalak@uwaterloo.ca
 
-Project Link: [https://github.com/dgobalak/HeatML](https://github.com/dgobalak/HeatML)
+Project Link: [https://2021.spaceappschallenge.org](https://2021.spaceappschallenge.org/challenges/statements/warning-things-are-heating-up/teams/heatml/project)
 
 
 
 <!-- ACKNOWLEDGEMENTS -->
-<!-- ## Acknowledgements -->
-
-<!-- * [Kaggle Dataset](https://www.kaggle.com/willyiamyu/nba-2k-ratings-with-real-nba-stats) -->
-
+## Acknowledgements
+* <p class="footer-attribution">Icons made by
+      <a href="https://www.freepik.com" title="Freepik">Freepik</a> and
+      <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a>
+      from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+  </p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
